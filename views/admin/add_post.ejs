@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Add post page</h1>
+     <form action="/admin/<% if (editing) { %>edit-post<% } else { %>add-post<% } %>"  method="POST">
+
+        <input type="text" name="title" placeholder="title" value="<% if (editing) { %><%= post.title %><% } %>" required/>
+        <textarea name="body"  rows="4" cols="50" placeholder="what is on your mind..." required ><% if (editing) { %><%= post.body %><% } %></textarea>
+         <% if (editing) { %> 
+            <input type="hidden" value= "<%= post._id %>" name="postId" />
+
+            <% } %>
+          
+          
+        <button type="submit" name="submit" > Publish</button>
+
+
+
+     </form>
+</body>
+</html>

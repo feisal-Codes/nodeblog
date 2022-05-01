@@ -1,0 +1,37 @@
+<%- include('../includes/head.ejs') %>
+</head>
+
+
+
+    <main>
+        <%- include('../includes/nav.ejs') %>
+
+      <div class="blog_section">
+        <h2>Blog</h2>
+
+        <% if (posts.length > 0) { %> <% for (post of posts ) { %>
+        <h3><a href="/admin/post/<%= post._id %>"><%= post.title %></a></h3>
+        <p class="extract"><%= post.getExtract() %>...<a href="/admin/post/<%= post._id %>"> Read More... </a></p>
+
+        <% } %> <% } %>
+      </div>
+    
+    </main>
+     <!-- <script> -->
+ <!-- type="text/javascript" src="/js/extract.js"> -->
+
+<!-- //      const collection = document.getElementsByClassName("readmore");
+
+// for (let i = 0; i < collection.length; i++) {
+// 	  console.log('text: ', collection[i]);
+//       collection[i].addEventListener("click", ()=>{
+//       collection[i].innerHTML="<%= post.body %>";
+
+// })
+// 	} -->
+
+
+ 
+<!-- </script>  -->
+  </body>
+</html>
