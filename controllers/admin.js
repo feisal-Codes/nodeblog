@@ -1,11 +1,14 @@
 const Post = require("../models/post");
+const User = require("../models/user");
+
+
 //get all post by user
 exports.getPosts = (req, res, next) => {
   Post.find({ author: req.user._id })
     .then(results => {
       console.log(results);
       res.render("admin/blog", {
-        posts: results
+        posts: results,
       });
     })
     .catch(err => {
@@ -19,15 +22,15 @@ exports.getPost = (req, res, next) => {
   Post.findById(postId)
     .populate("author")
     .then(post => {
-        console.log("********************");
+      console.log("********************");
 
-        console.log(post.getLikes())
+      console.log(post.getLikes());
 
       console.log("********************");
       console.log(post);
       res.render("admin/post-detail", {
         post: post,
-        likes:post.getLikes()
+        likes: post.getLikes(),
       });
     })
     .catch(err => {
@@ -45,7 +48,7 @@ exports.addPost = (req, res, next) => {
     title: title,
     body: body,
     author: req.user._id,
-    likes:0
+    likes: 0,
   });
   post
     .save()
@@ -64,30 +67,7 @@ exports.getAddPost = (req, res, next) => {
   });
 };
 
-exports.likePost=(req,res,next)=>{
-    const postId = req.params.postId;
-    const like=req.query.like;
-    Post.findById(postId).then((post)=>{
-        if(!post){
-            res.redirect("/admin")
-        }
-        if(like=="true"){
-            post.addLike()
-
-        }
-        if(like=="false"){
-            post.addDislike()
-        }
-        return post.save()
-    }).then(()=>{
-        res.redirect("/admin/post/"+postId);
-
-    }).catch(err=>{
-        console.log(err)
-    })
-    
-}
-
+//like post
 
 //post edit post
 
@@ -138,46 +118,55 @@ exports.getEditPost = (req, res, next) => {
 };
 
 //post likes
-exports.addLike=(req, res, next)=>{
-    const like = req.body.like;
-    const postId= req.body.postId;
-    console.log("*********************************************#####################")
-    console.log(like);
-    Post.findById(postId).then((post)=>{
-        post.addLike();
+exports.addLike = (req, res, next) => {
+  const like = req.body.like;
+  const postId = req.body.postId;
+  console.log(
+    "*********************************************#####################"
+  );
+  console.log(like);
+  Post.findById(postId)
+    .then(post => {
+      post.addLike();
 
-        return post.save()
-    }).then(()=>{
-       res.redirect('back');        
+      return post.save();
     })
-    .catch((err)=>{
-        console.log(err)
+    .then(() => {
+      res.redirect("back");
     })
-    
-    // res.redirect('back');    
-}
+    .catch(err => {
+      console.log(err);
+    });
 
-exports.addDislike=(req, res, next)=>{
-    const postId= req.body.postId;
-    Post.findById(postId).then((post)=>{
-        post.addDislike();
-        return post.save()
-    }).then(()=>{
-       res.redirect('back');        
+  // res.redirect('back');
+};
+
+exports.addDislike = (req, res, next) => {
+  const postId = req.body.postId;
+  Post.findById(postId)
+    .then(post => {
+      post.addDislike();
+      return post.save();
     })
-    .catch((err)=>{
-        console.log(err)
-    })    
-}
+    .then(() => {
+      res.redirect("back");
+    })
+    .catch(err => {
+      console.log(err);
+    });
+};
 
 //delete post
 exports.deletePost = (req, res, next) => {
-
-  const postId= req.body.postId;  
-  Post.findByIdAndRemove(postId).then((result) => {
-         console.log("Post removed");
-         res.redirect("/admin")
-  }).catch((err)=>{
-      console.log(err)
-  });
+  const postId = req.body.postId;
+  Post.findByIdAndRemove(postId)
+    .then(result => {
+      console.log("Post removed");
+      User.addLikes(postId);
+      req.user.save();
+      res.redirect("/admin");
+    })
+    .catch(err => {
+      console.log(err);
+    });
 };

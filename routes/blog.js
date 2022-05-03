@@ -1,17 +1,22 @@
 const express= require("express");
 const router = express.Router()
+const BlogController = require("../controllers/blog")
+
 
 //get all blogs
 
-// router.get("/",(req,res,next)=>{
-//     res.send("Hello world, this is node js in action")
-// })
+router.get("/", BlogController.getPosts);
+
+
 
 // //get specific post
+router.get("/post/:postId", BlogController.getPost);
 
-// router.get("/post/:postId",(req,res, next)=>{
-//     res.send("this is a single post");
-// })
+
+//like post
+
+router.get("/like-post/:postId", BlogController.likePost);
+
 
 
 

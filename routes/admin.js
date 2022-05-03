@@ -11,9 +11,6 @@ router.post("/add-post",adminController.addPost);
 
 router.post("/edit-post",adminController.editPost);
 
-//add like and dislikes
-router.post("/add-like",adminController.addLike)
-router.post("/add-dislike",adminController.addDislike)
 
 
 //delete post
@@ -33,7 +30,6 @@ router.get("/add-post",adminController.getAddPost);
 //get edit post
 
 router.get("/edit-post/:postId", adminController.getEditPost);
-router.get("/like-post/:postId", adminController.likePost);
 
 
 

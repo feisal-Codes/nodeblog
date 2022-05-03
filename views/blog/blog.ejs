@@ -1,0 +1,26 @@
+<%- include('../includes/head.ejs') %>
+</head>
+
+
+
+    <main>
+        <%- include('../includes/nav.ejs') %>
+
+      <div class="blog_section">
+        <h2>Blog</h2>
+
+        <% if (posts.length > 0) { %> <% for (post of posts ) { %>
+        <h3><a href="/post/<%= post._id %>"><%= post.title %></a></h3>
+        <p class="extract"><%= post.getExtract() %>...<a href="/post/<%= post._id %>"> Read More... </a></p>
+
+        <% } %> <% } %>
+      </div>
+    
+    </main>
+ 
+
+
+
+ 
+  </body>
+</html>
