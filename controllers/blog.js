@@ -1,4 +1,6 @@
 const Post = require("../models/post");
+const Comment= require("../models/comment");
+const post = require("../models/post");
 
 
 
@@ -17,18 +19,16 @@ exports.getPosts = (req, res, next) => {
   };
   exports.getPost = (req, res, next) => {
     const postId = req.params.postId;
+    const loadComments= req.query.comment;
+
     Post.findById(postId)
       .populate("author")
       .then(post => {
-        // console.log("********************");
-  
-        // console.log(post.getLikes());
-  
-        // console.log("********************");
-        // console.log(post);
+       
         res.render("blog/post-detail", {
           post: post,
           likes: post.getLikes(),
+          comments:loadComments,
         });
         // res.send("Hey")
       })
@@ -65,3 +65,32 @@ exports.getPosts = (req, res, next) => {
       });
   };
   
+  //add comment
+
+  exports.addComment=(req,res, next)=>{
+ 
+    const postId=req.body.postId;
+    const updatedComment = req.body.comment;
+
+    Post.findById(postId).then((post)=>{
+         const comment= new Comment({
+           text:updatedComment,
+           userId:req.user._id,
+           postId:post._id
+         })
+      
+         comment.save().then((comment)=>{
+          
+           post.addComent(comment._id);
+           post.save()
+           res.redirect("/post/"+postId);
+          }).catch(err=>{console.log(err)})
+          
+    }).catch(err=>{
+        console.log(err)
+      })
+     
+    
+    
+
+  }
