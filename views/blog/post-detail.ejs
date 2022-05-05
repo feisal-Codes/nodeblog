@@ -11,22 +11,15 @@
    
     <p><%= post.body %></p>
     <p><%= post.author.name %></p>
-   
-    <button><a href="#">Comments</a></button>
+    <button><a href="/post/<%=post._id %>?comment=true">Comments</a></button>
     <button><a href="/like-post/<%= post._id %>?like=true">Like Post</a> <span><%= post.getLikes() %></span> </button>
-    <!-- <form action="/admin/add-like" method="POST">
-      <input type="hidden" name="like" value="true" />
-      <input type="hidden" name="postId" value="<%= post._id %>" />
-      <button type="submit">Like </button>
-    
-
-    </form> -->
-    <!-- <form action="/admin/add-dislike" method="POST">
-      <input type="hidden" name="dislike" value="false" />
-      <input type="hidden" name="postId" value="<%= post._id %>" />
-
-      <button type="submit">Dislike</button>
-    </form> -->
+    <% if(comments) {%>
+        <form action="/add-comment" method="POST"> 
+          <input type="text" name="comment" style="width:80%;background-color:rgb(250, 240, 240);height: 20px;padding:5px; margin-top: 10px;" placeholder="write a comment" />
+          <input type="hidden" name="postId" value="<%= post._id %>"/>
+          <button type="submit">Comment</button>       
+        </form>
+      <%}%>
     </div>
     <sidebar class="sidebar">
         <div>

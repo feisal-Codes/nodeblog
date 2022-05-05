@@ -17,7 +17,9 @@ router.get("/post/:postId", BlogController.getPost);
 
 router.get("/like-post/:postId", BlogController.likePost);
 
+//add comment
 
+router.post("/add-comment", BlogController.addComment);
 
 
 module.exports= router;

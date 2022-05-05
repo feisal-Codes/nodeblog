@@ -21,6 +21,15 @@ const PostSchema = new Schema({
   likes: {
     type: Number,
   },
+
+  comments:[
+    {
+      commentId: {
+        type: Schema.Types.ObjectId,
+        ref: "Comment",
+      },
+    },
+  ]
   //   },
 });
 
@@ -36,6 +45,15 @@ PostSchema.methods.addDislike = function () {
   return this.likes;
 };
 
+
+PostSchema.methods.addComent= function (commentId) {
+  return this.comments.push({commentId})
+};
+
+PostSchema.methods.getComments=function(){
+  return this.comments ;
+}
+
 PostSchema.methods.getLikes = function () {
   return this.likes;
 };
@@ -45,4 +63,6 @@ PostSchema.methods.getExtract=function(){
   const maxLength= 250;
   return this.body.substr(0, maxLength);
 }
+
+
 module.exports = mongoose.model("Post", PostSchema);

@@ -53,4 +53,5 @@ UserSchema.methods.getLikes = function () {
   return this.likes;
 }
 
+
 module.exports = mongoose.model("User", UserSchema);

@@ -1,6 +1,7 @@
 const express = require("express");
 const path = require("path");
 const bodyParser = require('body-parser');
+const config= require('./config')
 
 
 const User = require("./models/user");
@@ -31,10 +32,16 @@ app.use("/admin", AdminRoutes);
 
 app.use(BlogRoutes);
 
+app.use("*",(req,res,next)=>{
+  res.send("404! Page not found")
+
+})
+
+
 //databse connection
 mongoose
   .connect(
-    "mongodb+srv://feisal:aqNw7jkUTDBFWx6h@cluster0.ponza.mongodb.net/blog?retryWrites=true&w=majority"
+    config
   )
   .then(result => {
     User.findOne().then(user => {
