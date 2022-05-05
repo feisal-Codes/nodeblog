@@ -23,12 +23,17 @@ exports.getPosts = (req, res, next) => {
 
     Post.findById(postId)
       .populate("author")
+      .populate("comments.commentId")
       .then(post => {
-       
+       console.log(post.author)
+       console.log("******************")
+       console.log(post.getComments())
+       console.log("******************")
+
         res.render("blog/post-detail", {
           post: post,
           likes: post.getLikes(),
-          comments:loadComments,
+          comments:{loadComments:loadComments,commentsData:post.getComments()},
         });
         // res.send("Hey")
       })
@@ -83,7 +88,7 @@ exports.getPosts = (req, res, next) => {
           
            post.addComent(comment._id);
            post.save()
-           res.redirect("/post/"+postId);
+           res.redirect("/post/"+postId+"?comment=true");
           }).catch(err=>{console.log(err)})
           
     }).catch(err=>{

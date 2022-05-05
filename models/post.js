@@ -65,4 +65,6 @@ PostSchema.methods.getExtract=function(){
 }
 
 
+
+
 module.exports = mongoose.model("Post", PostSchema);
