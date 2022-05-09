@@ -4,7 +4,7 @@ const User = require("../models/user");
 
 //get all post by user
 exports.getPosts = (req, res, next) => {
-  Post.find({ author: req.user._id })
+  Post.find({ author: req.user._id }).populate("author")
     .then(results => {
       console.log(results);
       res.render("admin/blog", {

@@ -5,27 +5,30 @@ const post = require("../models/post");
 
 
 exports.getPosts = (req, res, next) => {
-    Post.find()
+    Post.find().sort({createdAt:-1}).populate("author")
       .then(results => {
-        // console.log(results);
+        console.log("**************************************")
+        console.log(results);
+        console.log("**************************************")
+
         res.render("blog/blog", {
           posts: results,
         });
         // res.send("hey")
       })
-      .catch(err => {
+      .catch(err => { 
         console.log(err);
       });
   };
   exports.getPost = (req, res, next) => {
     const postId = req.params.postId;
     const loadComments= req.query.comment;
-
     Post.findById(postId)
       .populate("author")
-      .populate("comments.commentId")
+      .populate("comments.commentId"  )
+      .populate("comments.commentUser")
       .then(post => {
-       console.log(post.author)
+      //  console.log(post.author)
        console.log("******************")
        console.log(post.getComments())
        console.log("******************")
@@ -62,7 +65,8 @@ exports.getPosts = (req, res, next) => {
       })
       .then(() => {
         console.log(req.user.getLikes());
-        res.redirect("/post/"+postId);
+        // res.redirect("/post/"+postId);
+        res.redirect("back")
         // res.send(req.user.getLikes());
       })
       .catch(err => {
@@ -86,7 +90,7 @@ exports.getPosts = (req, res, next) => {
       
          comment.save().then((comment)=>{
           
-           post.addComent(comment._id);
+           post.addComent(comment._id, req.user._id);
            post.save()
            res.redirect("/post/"+postId+"?comment=true");
           }).catch(err=>{console.log(err)})

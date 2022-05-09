@@ -1,26 +1,94 @@
 <%- include('../includes/head.ejs') %>
-</head>
+  </head>
 
 
 
-    <main>
-        <%- include('../includes/nav.ejs') %>
+  <main>
+    <%- include('../includes/nav.ejs') %>
 
       <div class="blog_section">
-        <h2>Blog</h2>
+        <div style=" margin-left:-5%">
+          <%- include('../includes/header.ejs') %>
+        </div>
+        <!-- <h2>Blog</h2> -->
+        <hr style="margin: 0; margin-top: 130px;" />
+        <% if (posts.length> 0) { %> <% for (post of posts ) { %>
+            <div class="blog_section_container">
+              <div>
+                <div style=" margin-left:20px ;">
+                  <h3><a class="title" href="#">
+                      <%= post.author.name%>
+                    </a></h3>
+                    <a class="extract" href="/post/<%= post._id %>?comment=true" style="cursor:pointer">
+                      <p >
+                      <%= post.getExtract() %>
+                    </p>
+                  </a>
+                </div>
+                <div style="width:80%; margin-left: 20px;" class="d-flex justify-content-between">
+                  <a class="icons" href="/post/<%=post._id %>?comment=true"><i class="bi bi-chat "></i>
+                    <% if(post.comments.length) { %>
+                      <%= post.comments.length %>
+                        <%}%>
 
-        <% if (posts.length > 0) { %> <% for (post of posts ) { %>
-        <h3><a href="/admin/post/<%= post._id %>"><%= post.title %></a></h3>
-        <p class="extract"><%= post.getExtract() %>...<a href="/admin/post/<%= post._id %>"> Read More... </a></p>
+                  </a>
+                  <a class="icons " href="/like-post/<%= post._id %>?like=true">
 
-        <% } %> <% } %>
+
+                    <% if(post.getLikes()){ %>
+                      <i class="bi bi-heart-fill"></i>
+                      <% } else{ %>
+                        <i class="bi bi-heart"></i>
+                        <% } %>
+
+                          <!-- <i class="bi bi-heart-fill disliked secondheart"></i> -->
+
+                          <span>
+                            <% if(post.getLikes()){ %>
+                              <%= post.getLikes() %>
+                                <%}%>
+                          </span>
+                  </a>
+                  <a class="icons" href="#"><i class="bi bi-share icons"></i></a>
+                  <a class="icons" href=#"><i class="bi bi-file-arrow-up "></i></a>
+                </div>
+              </div>
+            </div>
+
+            <hr style="margin: 0;" />
+
+            <% } %>
+              <% } %>
       </div>
-    
-    </main>
- 
+
+      <%- include('../includes/sidebar.ejs') %>
+
+  </main>
 
 
 
- 
+
+  <script>
+  // const collection = document.getElementsByClassName("heart")
+  // const sCollection= document.getElementsByClassName("secondheart")
+
+
+  // for(let i=0; i<collection.length; i++){
+  //   collection[i].addEventListener("click", ()=>{
+  //       if (collection[i].className !="liked"){
+  //           //  sCollection[i].className="liked";
+  //            collection[i].className="liked";
+  //       }
+  //       else {
+  //         collection[i].className="disliked";
+
+  //       }
+
+  //   })
+  // }
+
+
+  </script>
   </body>
-</html>
+
+  </html>

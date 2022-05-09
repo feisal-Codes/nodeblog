@@ -2,25 +2,30 @@ const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
 
-const UserSchema = new Schema({
-  name: {
-    type: String,
-    required: true,
-  },
-  email: {
-    type: String,
-    required: true,
-  },
-
-  likes: [
-    {
-      postId: {
-        type: Schema.Types.ObjectId,
-        ref: "Post",
-      },
+const UserSchema = new Schema(
+  {
+    name: {
+      type: String,
+      required: true,
     },
-  ],
-});
+    email: {
+      type: String,
+      required: true,
+    },
+
+    likes: [
+      {
+        postId: {
+          type: Schema.Types.ObjectId,
+          ref: "Post",
+        },
+      },
+    ],
+  },
+  {
+    timestamps: true,
+  }
+);
 
 //takes a post id as an arguement
 UserSchema.methods.addLikes = function (postId) {
@@ -39,8 +44,7 @@ UserSchema.methods.addLikes = function (postId) {
   if (LikeExists == undefined) {
     this.likes.push({ postId });
     return true;
-  } 
-  else if (LikeExists) {
+  } else if (LikeExists) {
     const filteredArray = this.likes.filter(post => {
       return post.postId.toString() != postId;
     });
@@ -51,7 +55,6 @@ UserSchema.methods.addLikes = function (postId) {
 
 UserSchema.methods.getLikes = function () {
   return this.likes;
-}
-
+};
 
 module.exports = mongoose.model("User", UserSchema);
