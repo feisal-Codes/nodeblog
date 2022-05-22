@@ -8,6 +8,7 @@ const mongoDbStore = require("connect-mongodb-session")(session);
 const User = require("./models/user");
 const BlogRoutes = require("./routes/blog");
 const AdminRoutes = require("./routes/admin");
+// const isAuth= require("./middleware/isAuth")
 
 const mongoose = require("mongoose");
 

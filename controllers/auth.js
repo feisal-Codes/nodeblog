@@ -26,7 +26,7 @@ exports.postLogin = (req, res) => {
             req.session.user = user;
             return req.session.save(err => {
               console.log(err);
-              return res.send("password matched!");
+              return res.redirect("/");
             });
           }
           res.redirect("/login");
@@ -84,3 +84,9 @@ exports.postSignup = (req, res) => {
   //  req.session.isLoggedin=true;
   //  res.setHeader("Set-Cookie", "loggedIn=true")
 };
+exports.postLogout = (req, res, next) => {
+    req.session.destroy(err => {
+      console.log(err);
+      res.redirect('/');
+    });
+  };
