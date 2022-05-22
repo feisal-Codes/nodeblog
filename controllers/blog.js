@@ -1,5 +1,5 @@
 const Post = require("../models/post");
-const Comment= require("../models/comment");
+const Comment= require("../comment");
 const post = require("../models/post");
 
 
@@ -103,3 +103,5 @@ exports.getPosts = (req, res, next) => {
     
 
   }
+
+ 
