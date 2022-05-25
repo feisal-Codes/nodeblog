@@ -46,6 +46,8 @@
                 <input class=" myinput p-2   w-100 " type="text" name="comment" placeholder="Tweet Your Reply"
                   required />
               </div>
+              <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+
               <input type="hidden" name="postId" value="<%= post._id %>" />
               <div class="d-flex  justify-content-end d-flex align-items-end">
                 <button class="btn btn-primary rounded-pill " type="submit">Reply</button>

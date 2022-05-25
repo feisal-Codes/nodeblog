@@ -1,0 +1,106 @@
+<%- include('../includes/head.ejs') %>
+    <div id="navbar" style="background-color: #ffc017;color:black" class="sticky-top">
+        <%- include('../includes/navbar.ejs') %>
+    </div>
+
+    <div id= "mainBanner" class="banner d-flex justify-content-around">
+        <div class="main_header ">
+            <h1>Stay Curious.</h1>
+            <p>Discover stories, thinking, and expertise from writers on any topic.</p>
+            <button class="btn btn-dark rounded-pill">
+                Start Reading
+            </button>
+        </div>
+        <div class="animated">
+
+            M M M M M M M M M M M M M M M M M M M M M
+            </br>
+            M M M M M M M M M M M M M M M M M M M M M M M M M
+            M M M M M M M M M M M M
+            </br>
+
+            M M M M M M M M M M M M M M M M M M M
+            M M M M M M M M M M M M M M M M M M M M M
+            </br>
+            M M M M M M M M M M M M M M
+            M M M M M M M M M M M M M M M M M
+            M M M M M M M M M M M M M M M M M M M
+            M M M M M M M M M M M M M M M M M M M M M M M
+            </br>
+
+            M M M M M M M M M M M M
+            M M M M M M M M M M M M
+            M M M M M M M M M M M M M M M M M M M M M
+            </br>
+
+            M M M M M M M M M M M
+            M M M M M M M M M M M M M M M M M
+            M M M M M M M M M M M M M M M M
+
+        </div>
+
+
+
+    </div>
+    <hr style="margin: 0;height:1px; border:0; border-color: #000000; opacity: 1;">
+
+
+    <div class="article_section">
+        <div class="articles">
+
+
+            <% if (posts.length> 0) { %> <% for (post of posts ) { %>
+                    <div class="blog_section_container">
+                        <div>
+
+                            <div style=" margin-left:20px ;">
+                                <a class="username">
+
+                                    <%= post.author.name %>
+
+                                </a>
+                                <h2><a class="title" href="#">
+                                        <%= post.title %>
+                                    </a></h2>
+                                <a href="/post/<%= post._id %>?comment=true" style="cursor:pointer">
+                                    <p class="extract">
+                                        <%= post.getExtract() %>
+                                    </p>
+                                </a>
+                            </div>
+
+                        </div>
+                    </div>
+                    <% } %>
+                        <% } %>
+        </div>
+        <div class="fixed_section"  id="fixedDiv">
+            <div class="tags">
+                <p style="font-weight: bold; font-size: small;">DISCOVER MORE OF WHAT MATTERS TO YOU</p>
+                <ul>
+                  <li class="btn btn-outline-secondary btn-sm"><a>Self</a></li> 
+                  <li  class="btn btn-outline-secondary btn-sm"><a>Relationships</a></li> 
+                  <li class="btn btn-outline-secondary btn-sm "><a>Data Science</a></li> 
+                  <li class="btn btn-outline-secondary btn-sm "><a>Programming</a></li> 
+                  <li class="btn btn-outline-secondary btn-sm"><a>Productivity</a></li> 
+                  <li class="btn btn-outline-secondary btn-sm"><a>Javascript</a></li> 
+                  <li class="btn btn-outline-secondary btn-sm"><a>Machine Learning</a></li> 
+                  <li class="btn btn-outline-secondary btn-sm"><a>Politics</a></li> 
+                  <li class="btn btn-outline-secondary btn-sm"><a>Health</a></li> 
+
+                </ul>
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+
+    
+    <script type="text/javascript" src="/js/scroll.js"></script>  
+    <script type="text/javascript" src="/js/extract.js"></script>  
+
+
+    <%- include('../includes/end.ejs') %>

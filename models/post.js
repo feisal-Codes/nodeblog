@@ -69,7 +69,7 @@ PostSchema.methods.getLikes = function () {
 };
 
 PostSchema.methods.getExtract = function () {
-  const maxLength = 250;
+  const maxLength = 150;
   return this.body.substr(0, maxLength);
 };
 

@@ -11,7 +11,7 @@ exports.getPosts = (req, res, next) => {
         console.log(results);
         console.log("**************************************")
 
-        res.render("blog/blog", {
+        res.render("blog/index", {
           posts: results,
         });
         // res.send("hey")

@@ -18,12 +18,12 @@ router.post('/logout', authController.postLogout);
 
 //get all blogs
 
-router.get("/", isAuth, BlogController.getPosts);
+router.get("/",  BlogController.getPosts);
 
 
 
 // //get specific post
-router.get("/post/:postId",isAuth, BlogController.getPost);
+router.get("/post/:postId", BlogController.getPost);
 
 
 //like post
