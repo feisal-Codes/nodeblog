@@ -3,79 +3,22 @@
   </head>
 
   <body>
-    <main>
-      <%- include('../includes/nav.ejs') %>
-        <div class="blog_section">
-          <div style="padding-top:30px;padding-bottom:30px;top:0; position: fixed; width:41%;background-color: white;">
-            <a href="/"><i class="bi bi-arrow-left" style="color:black; font-size:20px"></i></a>
+    <main class="post_detail_main">
 
-            <strong style="margin-left:20px;  font-size:20px">Tweet</strong>
-          </div>
-         <div style="margin-top:100px";>
-          <p>
-            <%= post.author.name %>
-          </p>
+      <div class="sidebar">
 
-          <p>
-            <%= post.body %>
-          </p>
-        </div>
-          <hr />
-          <div class="d-flex justify-content-around">
-            <a href="/post/<%=post._id %>?comment=true"><i class="bi bi-chat "></i>
-              <% if(comments.commentsData.length) { %>
-                <%= comments.commentsData.length %>
-                  <%}%>
+      </div>
 
-            </a>
-            <a href="/like-post/<%= post._id %>?like=true"><i class="bi bi-heart"></i>
-              <span>
-                <% if(post.getLikes()){ %>
-                  <%= post.getLikes() %>
-                    <%}%>
-              </span>
-            </a>
-            <a href="#"><i class="bi bi-share"></i></a>
-            <a href=#"><i class="bi bi-file-arrow-up"></i></a>
-          </div>
-          <hr />
+      <div class="main">
+     
+      </div>
 
-          <% if(comments.loadComments) {%>
-            <form class="form-control mt-2 mb-2 d-flex flex-column border-0" action="/add-comment" method="POST">
-              <div>
-                <input class=" myinput p-2   w-100 " type="text" name="comment" placeholder="Tweet Your Reply"
-                  required />
-              </div>
-              <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+      <div class="second_sidebar">
 
-              <input type="hidden" name="postId" value="<%= post._id %>" />
-              <div class="d-flex  justify-content-end d-flex align-items-end">
-                <button class="btn btn-primary rounded-pill " type="submit">Reply</button>
-              </div>
-            </form>
-            <!-- <hr/> -->
-            <% if(comments.commentsData.length !=0) { %>
-              <% comments.commentsData.reverse().forEach(function(comment){ %>
-                <hr style=" margin-left: -30px;" />
-                <div style=" padding:5px">
-                  <h6>
-                    <%= comment.commentUser.name %>
-                  </h6>
-                  <p>
-                    <%= comment.commentId.text %>
-                  </p>
-                </div>
+      </div>
 
-                <% }) %>
-                  <%}%>
 
-                    <%}%>
-        </div>
-        <sidebar class="sidebar">
-          <div>
-            <h2>Sidebar</h2>
-          </div>
-        </sidebar>
+
     </main>
   </body>
 
