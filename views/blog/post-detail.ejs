@@ -2,7 +2,7 @@
 
   </head>
 
-  <body>
+  <body style="background-color:#fbf8f2">
     <main class="post_detail_main">
 
       <div class="sidebar">
@@ -10,7 +10,106 @@
       </div>
 
       <div class="main">
-     
+        <div class="padding">
+          <span>Published in
+            <a>
+              <%= post.author.name %>
+            </a>
+          </span>
+        </div>
+        <hr style="margin-top: 0;" />
+        <div class="padding pt-5">
+          <a>
+            <%= post.author.name %>
+          </a>
+        </div>
+
+        <div class="padding">
+          <div>
+
+
+            <h2>
+              <%= post.title %>
+
+            </h2>
+
+
+            <p>
+              <%= post.body %>
+            </p>
+          </div>
+
+
+          <div>
+            <a style="text-decoration: none; color:inherit" href="/like-post/<%= post._id %>?like=true"><i style="font-size:25px ;"
+                class="bi  bi-hand-thumbs-up"></i>
+              <span style="font-size: 16px;">
+                <% if(post.getLikes()){ %>
+                  <%= post.getLikes() %>
+                    <%}%>
+              </span>
+            </a>
+            <button style="border:none; background-color: transparent; font-size: 24px; margin-left: 20px;" class="bi bi-chat-right"
+              type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions"
+              aria-controls="offcanvasWithBothOptions">
+              <% if(comments.commentsData.length !=0) { %>
+                <span style="font-size: 16px;">
+                  <%= comments.commentsData.length %>
+                </span>
+                <%}%>
+
+
+            </button>
+
+
+
+
+          </div>
+
+
+          <div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions"
+            aria-labelledby="offcanvasWithBothOptionsLabel" style="width:30%">
+            <div class="offcanvas-header">
+              <h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel">Comments section</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+
+              <% if(comments.commentsData.length !=0) { %>
+                <% comments.commentsData.reverse().forEach(function(comment){ %>
+                  <hr style=" margin-left: -30px;" />
+                  <div style=" padding:5px">
+                    <h6>
+                      <%= comment.commentUser.name %>
+                    </h6>
+                    <p>
+                      <%= comment.commentId.text %>
+                    </p>
+                  </div>
+                  <% }) %>
+                    <%}%>
+
+
+
+                      <div style=" height:100%">
+
+                      </div>
+            </div>
+          </div>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+      </div>
       </div>
 
       <div class="second_sidebar">
@@ -20,6 +119,7 @@
 
 
     </main>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
   </body>
 
   </html>

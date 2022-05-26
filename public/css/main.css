@@ -114,8 +114,9 @@ li {
 /* styles for post_detail page */
 
 .post_detail_main {
-  /* background-color: red; */
+  /* background-color: #fbf8f2; */
   display: flex;
+
 }
 .sidebar {
   /* background-color: blue; */
@@ -157,6 +158,21 @@ li {
   border-bottom: none;
   border-right: none;
 }
+
+
+.padding{
+  padding-left: 5em;
+  padding-top:1em;
+  padding-bottom: 1em;
+  padding-right: 3em;
+}
+
+
+
+
+
+
+
 
 @media (max-width: 480px) {
   .post_detail_main {
