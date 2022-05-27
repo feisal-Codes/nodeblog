@@ -11,12 +11,15 @@ let navbar = document.getElementById("navbar");
    
     if(entries[0].intersectionRatio === 0 ){
        navbar.style.backgroundColor="#ffffff"
+       navbar.style.borderBottom="solid 1px black"
+    
         
     }
     if(entries[0].intersectionRatio !== 0){
         
         navbar.style.backgroundColor="#ffc017";
         navbar.style.color="#000000"
+        navbar.style.boxShadow=none;
         
     }
 });

@@ -24,7 +24,8 @@
     <p><%= post.author.name %></p>
    
     <button><a href="#">Comments</a></button>
-    <button><a href="/admin/like-post/<%= post._id %>?like=true">Like Post</a> <span><%= post.getLikes() %></span> </button>
+    <button>
+      <a href="/admin/like-post/<%= post._id %>?like=true">Like Post</a> <span><%= post.getLikes() %></span> </button>
     <!-- <form action="/admin/add-like" method="POST">
       <input type="hidden" name="like" value="true" />
       <input type="hidden" name="postId" value="<%= post._id %>" />

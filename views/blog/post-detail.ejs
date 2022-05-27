@@ -41,25 +41,42 @@
 
 
           <div>
-            <a style="text-decoration: none; color:inherit" href="/like-post/<%= post._id %>?like=true"><i style="font-size:25px ;"
-                class="bi  bi-hand-thumbs-up"></i>
-              <span style="font-size: 16px;">
-                <% if(post.getLikes()){ %>
-                  <%= post.getLikes() %>
-                    <%}%>
-              </span>
-            </a>
-            <button style="border:none; background-color: transparent; font-size: 24px; margin-left: 20px;" class="bi bi-chat-right"
-              type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions"
-              aria-controls="offcanvasWithBothOptions">
-              <% if(comments.commentsData.length !=0) { %>
+
+            <% if(isAuthenticated){ %>
+              <a style="text-decoration: none; color:inherit" href="/like-post/<%= post._id %>?like=true"><i
+                  style="font-size:25px ;" class="bi  bi-hand-thumbs-up"></i>
                 <span style="font-size: 16px;">
-                  <%= comments.commentsData.length %>
+                  <% if(post.getLikes()){ %>
+                    <%= post.getLikes() %>
+                      <%}%>
                 </span>
-                <%}%>
+              </a>
+              <%} else { %>
+                <button style="border:none; background-color: transparent;" type="button" data-bs-toggle="modal"
+                  data-bs-target="#exampleModal">
+                  <i style="font-size:25px ;" class="bi  bi-hand-thumbs-up"></i>
+                  <span style="font-size: 16px;">
+                    <% if(post.getLikes()){ %>
+                      <%= post.getLikes() %>
+                        <%}%>
+                  </span>
+                </button>
+                <% } %>
 
 
-            </button>
+
+
+                  <button style="border:none; background-color: transparent; font-size: 24px; margin-left: 20px;"
+                    class="bi bi-chat-right" type="button" data-bs-toggle="offcanvas"
+                    data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">
+                    <% if(comments.commentsData.length !=0) { %>
+                      <span style="font-size: 16px;">
+                        <%= comments.commentsData.length %>
+                      </span>
+                      <%}%>
+
+
+                  </button>
 
 
 
@@ -118,8 +135,47 @@
 
 
 
-    </main>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
-  </body>
+      <!-- Modal -->
+      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Login Required</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
 
-  </html>
+              <form class="w-100 mt-5 p-3" action="/login" method="POST">
+                <div class="mb-3">
+                  <label for="exampleInputEmail1" class="form-label">Email address</label>
+                  <input name="email" type="email" class="form-control" id="exampleInputEmail1"
+                    aria-describedby="emailHelp" required>
+                </div>
+                <div class="mb-3">
+                  <label for="exampleInputPassword1" class="form-label">Password</label>
+                  <input name="password" type="password" class="form-control" id="exampleInputPassword1" required>
+                </div>
+                <div class="mb-3 form-check">
+                  <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                  <label class="form-check-label" for="exampleCheck1">Remember Me</label>
+                </div>
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+
+                <button type="submit" class="btn btn-primary w-100">Login</button>
+              </form>
+
+
+
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+
+    </main>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script> -->
+    <%- include('../includes/end.ejs') %>
