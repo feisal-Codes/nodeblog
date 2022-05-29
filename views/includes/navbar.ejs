@@ -19,9 +19,23 @@
     <style>
         .modal-backdrop {
             z-index: 800;
-            /* background-color: #fbf8f2; */
+            background-color: #fffcf3;
+            opacity: 1;
 
         }
+
+        .modal-dialog {
+            height: 90%;
+            width: 100%;
+            box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+        }
+
+        .modal-content {
+            background-color: white;
+            height: 100%;
+            width: 100%;
+        }
+        
     </style>
 </head>
 
@@ -53,18 +67,18 @@
                 </li>
                 <% if (isAuthenticated) { %>
                     <li class="nav-item">
-                            <form action="/logout" method="POST">
-                                <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+                        <form action="/logout" method="POST">
+                            <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
 
-                                <button class="nav-link" style="border:none; background-color: transparent;"
-                                    type="submit"> Signout</button>
+                            <button class="nav-link" style="border:none; background-color: transparent;" type="submit">
+                                Signout</button>
 
-                            </form>
+                        </form>
 
                         <% }else{ %>
                     <li class="nav-item">
-                        <button class="nav-link" style="border:none; background-color: transparent;" type="button"
-                            data-bs-toggle="modal" data-bs-target="#exampleModal2">
+                        <button class="nav-link " id="mybtn" style="border:none; background-color: transparent;"
+                            type="button" data-bs-toggle="modal" data-bs-target="#exampleModal2">
                             Signin
                         </button>
                     </li>
@@ -80,14 +94,15 @@
     </nav>
 
     <!-- <hr style="background-color:black;margin: 0;height:1px; border:none;opacity: 1;"> -->
-    <div class="modal fade" id="exampleModal2" data-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel"
+    <div class="modal fade " id="exampleModal2" data-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
 
-        <div class="modal-dialog">
+        <div class="modal-dialog " >
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Login Required</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close " id="mybtn2" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
 
@@ -120,7 +135,20 @@
         </div>
     </div>
 
+    <script>
+        navbar = document.getElementById("navbar");
 
+        let mybtn = document.getElementById("mybtn")
+        let mybtn2 = document.getElementById("mybtn2")
+
+        mybtn.addEventListener("click", () => {
+            navbar.classList.remove("sticky-top")
+        })
+        mybtn2.addEventListener("click", () => {
+            navbar.classList.add("sticky-top")
+            
+        })
+    </script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
 

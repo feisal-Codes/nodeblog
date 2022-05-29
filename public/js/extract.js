@@ -6,6 +6,8 @@ let navbar = document.getElementById("navbar");
 
 
 
+
+
  observer = new IntersectionObserver(function(entries) {
     console.log(entries)
    
@@ -19,7 +21,8 @@ let navbar = document.getElementById("navbar");
         
         navbar.style.backgroundColor="#ffc017";
         navbar.style.color="#000000"
-        navbar.style.boxShadow=none;
+        navbar.style.borderBottom="solid 1px black"
+        
         
     }
 });
