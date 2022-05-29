@@ -1,11 +1,48 @@
 <%- include('../includes/head.ejs') %>
 
+
+  <style>
+    i {
+      font-size: 21px;
+      color:#757575;
+      opacity: 1;
+    }
+
+    li {
+      margin-bottom: 40px;
+      cursor: pointer;
+    }
+   i:hover{
+     color:black;
+   }
+    ul {
+      margin-top: 180px;
+    }
+  </style>
+
+
+
   </head>
 
-  <body style="background-color:#fbf8f2">
+  <body style="background-color:#ffffff">
     <main class="post_detail_main">
 
       <div class="sidebar">
+
+
+
+        <ul>
+          <li data-bs-toggle="tooltip" data-bs-placement="right" title="Home"><i class="bi bi-house "></i>
+          </li>
+          <li data-bs-toggle="tooltip" data-bs-placement="right" title="Notifications"><i class="bi bi-bell"></i></li>
+          <li data-bs-toggle="tooltip" data-bs-placement="right" title="Bookmark"><i class="bi bi-bookmark"></i></li>
+          <li data-bs-toggle="tooltip" data-bs-placement="right" title="Stories" style="border-bottom: solid 1px silver; padding-bottom: 15px;"><i class="bi bi-list-nested"></i></li>
+
+          <li data-bs-toggle="tooltip" data-bs-placement="right" title="Write"><i class="bi bi-pencil-square"></i></li>
+
+        </ul>
+
+
 
       </div>
 
@@ -178,4 +215,8 @@
     <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
     crossorigin="anonymous"></script> -->
+    <script>
+      const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+      const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+    </script>
     <%- include('../includes/end.ejs') %>
