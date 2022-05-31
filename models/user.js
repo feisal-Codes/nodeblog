@@ -16,6 +16,8 @@ const UserSchema = new Schema(
      type:String,
      required:true
    },
+   resetToken:String,
+   resetTokenExpiration:Date,
     likes: [
       {
         postId: {
@@ -25,6 +27,7 @@ const UserSchema = new Schema(
       },
     ],
   },
+
   {
     timestamps: true,
   }

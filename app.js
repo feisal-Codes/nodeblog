@@ -4,7 +4,8 @@ const bodyParser = require("body-parser");
 const config = require("./config");
 const session = require("express-session");
 const mongoDbStore = require("connect-mongodb-session")(session);
-const csrf =require("csurf")
+const csrf = require("csurf");
+const flash = require("connect-flash");
 
 const User = require("./models/user");
 const BlogRoutes = require("./routes/blog");
@@ -18,7 +19,7 @@ const store = mongoDbStore({
   uri: config,
   collection: "sessions",
 });
-const csrfProtection= csrf();
+const csrfProtection = csrf();
 app.set("view engine", "ejs");
 app.set("views", "views");
 app.use(express.static(path.join(__dirname, "public")));
@@ -37,7 +38,27 @@ app.use(
   })
 );
 //using csrf as a middle ware,the package adds a csrftoken to the request body
+//when you register a middleware , you can use it anywhere in the app
 app.use(csrfProtection);
+
+app.use(flash());
+
+
+
+
+
+// transporter.sendMail(mailOptions,(err)=>{
+//  if(err){
+//    console.log("failed to send!",err)
+//  }
+//  else{
+//    console.log("email sent successfully!")
+//  }
+// })
+
+
+
+
 app.use((req, res, next) => {
   if (!req.session.user) {
     return next();
@@ -50,15 +71,12 @@ app.use((req, res, next) => {
     .catch(err => console.log(err));
 });
 
-app.use((req, res, next)=>{
-  //this fields are sent for every view that is rendered 
-    res.locals.isAuthenticated= req.session.loggedIn;
-    res.locals.csrfToken=req.csrfToken();
-    next()
-})
-
-
-
+app.use((req, res, next) => {
+  //this fields are sent for every view that is rendered
+  res.locals.isAuthenticated = req.session.loggedIn;
+  res.locals.csrfToken = req.csrfToken();
+  next();
+});
 
 app.use("/admin", AdminRoutes);
 
