@@ -4,13 +4,7 @@ const crypto = require("crypto");
 const nodemailer = require("nodemailer");
 const user = require("../models/user");
 
-const transporter = nodemailer.createTransport({
-  service: "gmail",
-  auth: {
-    user: "devworldprac@gmail.com",
-    pass: "0708897463Aa",
-  },
-});
+
 
 exports.getLogin = (req, res) => {
   // console.log(req.get("Cookie"))
